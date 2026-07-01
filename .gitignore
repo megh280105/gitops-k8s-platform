@@ -1,0 +1,17 @@
+# Terraform
+terraform.tfstate*
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+!*.tfvars.example
+
+# Go
+app/taskapi
+app/coverage.out
+
+# Helm chart dependencies (generated)
+helm/taskapi/charts/
+helm/taskapi/Chart.lock
+
+# OS
+.DS_Store

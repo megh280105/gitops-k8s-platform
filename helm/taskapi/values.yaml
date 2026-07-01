@@ -1,0 +1,38 @@
+replicaCount: 2
+
+image:
+  repository: ghcr.io/megh280105/gitops-k8s-platform
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+env:
+  DATABASE_URL: ""  # auto-built from postgresql values below
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
+
+# HPA intentionally omitted in v1 — kind has no metrics-server
+
+postgresql:
+  enabled: true
+  auth:
+    database: tasks
+    username: taskapi
+    password: changeme  # dev-only — see project plan dev-only assumptions
+
+serviceMonitor:
+  enabled: true
+  labels:
+    release: kube-prometheus-stack  # must match Helm release name of kube-prometheus-stack
+  interval: 30s
+  path: /metrics
