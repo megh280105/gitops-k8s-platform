@@ -2,16 +2,14 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 21.0"
 
-  cluster_name    = "gitops-${var.environment}"
-  cluster_version = var.cluster_version
+  name               = "gitops-${var.environment}"
+  kubernetes_version = var.cluster_version
 
   vpc_id     = var.vpc_id
   subnet_ids = var.subnet_ids
 
-  # Allow public API endpoint access (restrict in prod)
-  cluster_endpoint_public_access = true
+  endpoint_public_access = true
 
-  # Enable IRSA (IAM Roles for Service Accounts)
   enable_irsa = true
 
   eks_managed_node_groups = {
@@ -25,14 +23,6 @@ module "eks" {
         Environment = var.environment
       }
     }
-  }
-
-  # Cluster addons
-  cluster_addons = {
-    coredns                = {}
-    kube-proxy             = {}
-    vpc-cni                = {}
-    aws-ebs-csi-driver     = {}
   }
 
   tags = {
