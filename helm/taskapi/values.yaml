@@ -24,7 +24,6 @@ resources:
 # HPA intentionally omitted in v1 — kind has no metrics-server
 
 postgresql:
-  enabled: true
   auth:
     database: tasks
     username: taskapi
