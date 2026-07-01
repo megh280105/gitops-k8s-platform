@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: ghcr.io/megh280105/gitops-k8s-platform
-  tag: "ff3265109c017c67e9fe1f444e31fd8953caabf3"
+  tag: "337bc7040aa86faad61e5a703133dc1a78d069ba"
   pullPolicy: IfNotPresent
 
 service:
