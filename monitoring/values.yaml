@@ -8,19 +8,6 @@ grafana:
   adminPassword: admin  # dev-only — see project plan dev-only assumptions
   persistence:
     enabled: false
-  dashboardProviders:
-    dashboardproviders.yaml:
-      apiVersion: 1
-      providers:
-        - name: default
-          orgId: 1
-          folder: ""
-          type: file
-          disableDeletion: false
-          options:
-            path: /var/lib/grafana/dashboards/default
-  dashboardsConfigMaps:
-    default: taskapi-dashboard
 
 alertmanager:
   alertmanagerSpec:

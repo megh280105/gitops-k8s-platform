@@ -40,11 +40,11 @@ helm repo update
 if helm status kube-prometheus-stack -n monitoring &>/dev/null; then
   warn "kube-prometheus-stack already installed, skipping"
 else
-  info "Installing kube-prometheus-stack..."
+  info "Installing kube-prometheus-stack (this pulls several images, may take 5-10 min)..."
   helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
     -n monitoring --create-namespace \
     -f "$ROOT_DIR/monitoring/values.yaml" \
-    --timeout 5m --wait
+    --timeout 15m --wait
 fi
 
 info "Waiting for ServiceMonitor CRD..."
@@ -58,7 +58,7 @@ else
   info "Installing ArgoCD..."
   helm install argocd argo/argo-cd \
     -n argocd --create-namespace \
-    --timeout 5m --wait
+    --timeout 10m --wait
 fi
 
 info "Waiting for ArgoCD server..."
